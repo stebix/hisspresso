@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv sync)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run ruff format --check src tests)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run mypy)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run python -m pytest -v)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv sync 2>&1 | tail -5)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run pytest tests/ -v 2>&1)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run hisspresso --help 2>&1)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run hisspresso log coffee && uv run hisspresso log espresso --count 2 --at \"09:00\" && uv run hisspresso list 2>&1)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run hisspresso undo && uv run hisspresso list 2>&1)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run hisspresso beverages 2>&1)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run hisspresso config show 2>&1)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run ruff check src/ tests/ 2>&1)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run ruff check src/ tests/ --fix 2>&1)",
+      "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run pytest tests/ -q 2>&1)",
+      "Bash(uv run:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+[canvas]
+background = "white"
+axes = "white"
+ticks = "black"
+ticks_style = "default"
+
+[curve]
+color = "blue+"
+marker = "braille"
+
+[elements]
+threshold_low = "green"
+threshold_high = "red"
+dose_marker = "blue+"
+now_marker = "magenta"
