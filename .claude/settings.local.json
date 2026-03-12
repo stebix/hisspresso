@@ -17,7 +17,9 @@
       "Bash(cd C:/Users/jas05ha/code/hisspresso && uv run pytest tests/ -q 2>&1)",
       "Bash(uv run:*)",
       "Bash(git ls-tree:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(wc -l /c/Users/jas05ha/code/hisspresso/src/hisspresso/*.py /c/Users/jas05ha/code/hisspresso/tests/*.py)"
     ]
   }
 }
