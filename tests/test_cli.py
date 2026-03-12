@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from pathlib import Path
 from unittest.mock import patch
 
@@ -47,7 +48,7 @@ def test_parse_at_invalid_raises() -> None:
 
 
 @pytest.fixture()
-def _cli_env(tmp_path: Path) -> None:
+def _cli_env(tmp_path: Path) -> Iterator[None]:
     """Patch data paths so the CLI writes to a temp directory."""
     with (
         patch("hisspresso.cli._DATA_DIR", tmp_path),

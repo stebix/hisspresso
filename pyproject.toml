@@ -50,6 +50,10 @@ python_version = "3.13"
 strict = true
 files = ["src", "tests"]
 
+[[tool.mypy.overrides]]
+module = "plotext"
+ignore_missing_imports = true
+
 # ── Pytest ────────────────────────────────────────────────────────────
 [tool.pytest.ini_options]
 testpaths = ["tests"]

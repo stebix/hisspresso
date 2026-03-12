@@ -3,8 +3,16 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TypedDict
 
-_BUILTINS: list[dict[str, object]] = [
+
+class _BuiltinBeverage(TypedDict):
+    key: str
+    aliases: list[str]
+    caffeine_mg: int
+
+
+_BUILTINS: list[_BuiltinBeverage] = [
     {"key": "espresso", "aliases": ["shot"], "caffeine_mg": 63},
     {"key": "coffee", "aliases": ["drip", "filter"], "caffeine_mg": 95},
     {"key": "americano", "aliases": [], "caffeine_mg": 95},
@@ -61,13 +69,13 @@ def lookup(
                 )
 
     # Check built-ins.
-    for bev in _BUILTINS:
-        key = str(bev["key"]).lower()
-        aliases = [a.lower() for a in bev["aliases"]]  # type: ignore[union-attr]
-        if query == key or query in aliases:
+    for builtin in _BUILTINS:
+        builtin_key = str(builtin["key"]).lower()
+        builtin_aliases = [a.lower() for a in builtin["aliases"]]
+        if query == builtin_key or query in builtin_aliases:
             return BeverageMatch(
-                key=str(bev["key"]),
-                caffeine_mg=float(bev["caffeine_mg"]),  # type: ignore[arg-type]
+                key=str(builtin["key"]),
+                caffeine_mg=float(builtin["caffeine_mg"]),
                 custom=False,
             )
 
@@ -102,15 +110,15 @@ def list_all(
             seen_keys.add(key)
 
     # Built-ins (skip if shadowed by custom).
-    for bev in _BUILTINS:
-        key = str(bev["key"]).lower()
-        if key in seen_keys:
+    for builtin in _BUILTINS:
+        builtin_key = str(builtin["key"]).lower()
+        if builtin_key in seen_keys:
             continue
         result.append(
             {
-                "key": bev["key"],
-                "caffeine_mg": bev["caffeine_mg"],
-                "aliases": ", ".join(bev["aliases"]),  # type: ignore[arg-type]
+                "key": builtin["key"],
+                "caffeine_mg": builtin["caffeine_mg"],
+                "aliases": ", ".join(builtin["aliases"]),
                 "custom": False,
             }
         )

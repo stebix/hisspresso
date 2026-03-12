@@ -5,6 +5,7 @@ from __future__ import annotations
 import io
 import sys
 from datetime import UTC, datetime, timedelta
+from typing import cast
 
 from hisspresso.graph_theme import DEFAULT_THEME, GraphTheme
 from hisspresso.model import caffeine_curve
@@ -75,14 +76,14 @@ def render(
         if ts < start or ts > end:
             continue
         local_str = ts.astimezone().strftime(date_fmt)
-        count = int(dose.get("count", 1))  # type: ignore[arg-type]
+        count = cast(int, dose.get("count", 1))
         bev = dose.get("beverage", "?")
         label = f"{count}× {bev}" if count > 1 else str(bev)
         plt.vline(local_str, color=theme.dose_marker_color)
-        plt.text(  # type: ignore[arg-type]
+        plt.text(
             label,
             x=local_str,
-            y=float(dose["caffeine_mg"]) * count,
+            y=cast(float, dose["caffeine_mg"]) * count,
             color=theme.dose_marker_color,
         )
 

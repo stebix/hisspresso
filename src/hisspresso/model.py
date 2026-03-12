@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta
+from typing import cast
 
 
 def residual_caffeine(
@@ -20,7 +21,7 @@ def residual_caffeine(
         elapsed_hours = (at - t_dose).total_seconds() / 3600
         if elapsed_hours < 0:
             continue  # Dose is in the future — skip.
-        mg = float(dose["caffeine_mg"]) * int(dose["count"])  # type: ignore[arg-type]
+        mg = cast(float, dose["caffeine_mg"]) * cast(int, dose["count"])
         total += mg * (0.5 ** (elapsed_hours / half_life_hours))
     return total
 
@@ -72,7 +73,7 @@ def auto_window(
         elapsed_hours = (now - t_dose).total_seconds() / 3600
         if elapsed_hours < 0:
             continue
-        mg = float(dose["caffeine_mg"]) * int(dose["count"])  # type: ignore[call-overload]
+        mg = cast(float, dose["caffeine_mg"]) * cast(int, dose["count"])
         remaining = mg * (0.5 ** (elapsed_hours / half_life_hours))
         if remaining >= threshold_mg:
             relevant_timestamps.append(t_dose)

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from typing import cast
 
 import click
 from platformdirs import user_data_dir
@@ -329,8 +330,8 @@ def list_doses(deleted: bool, limit: int) -> None:
             short_id = str(d["id"])[:8]
             ts = _format_local(str(d["timestamp"]))
             bev = str(d["beverage"])
-            mg = float(d["caffeine_mg"]) * int(d["count"])  # type: ignore[arg-type]
-            count = int(d["count"])  # type: ignore[arg-type]
+            mg = cast(float, d["caffeine_mg"]) * cast(int, d["count"])
+            count = cast(int, d["count"])
             line = f"{short_id:>8}  {ts:<16}  {bev:<14}  {mg:>6.0f}  {count:>2}"
             if deleted:
                 del_flag = "yes" if d["deleted"] else ""

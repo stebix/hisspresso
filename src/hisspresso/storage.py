@@ -7,6 +7,7 @@ import sqlite3
 import uuid
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import cast
 
 DDL_V1 = """\
 CREATE TABLE IF NOT EXISTS meta (
@@ -74,7 +75,7 @@ class Store:
     def __init__(self, db_path: Path, machine_id: str) -> None:
         self._machine_id = machine_id
         self._conn = sqlite3.connect(str(db_path))
-        self._conn.row_factory = _dict_row  # type: ignore[assignment]
+        self._conn.row_factory = _dict_row
         self._conn.execute("PRAGMA journal_mode=WAL")
         self._conn.execute("PRAGMA foreign_keys=ON")
         self._init_schema()
@@ -92,7 +93,7 @@ class Store:
 
     def _schema_version(self) -> str:
         row = self._conn.execute("SELECT value FROM meta WHERE key = 'schema_version'").fetchone()
-        return row["value"] if row else "0"  # type: ignore[index]
+        return row["value"] if row else "0"
 
     # ── doses ────────────────────────────────────────────────────────
 
@@ -127,7 +128,7 @@ class Store:
             (prefix,),
         ).fetchall()
         if len(rows) == 1:
-            return rows[0]["id"]  # type: ignore[return-value]
+            return cast(str, rows[0]["id"])
         return None
 
     def soft_delete(self, id_prefix: str) -> str | None:
@@ -151,7 +152,7 @@ class Store:
         ).fetchone()
         if row is None:
             return None
-        dose_id: str = row["id"]  # type: ignore[assignment]
+        dose_id: str = row["id"]
         now = _now_utc()
         self._conn.execute(
             "UPDATE doses SET deleted = 1, updated_at = ? WHERE id = ?",
@@ -230,7 +231,7 @@ class Store:
                     ),
                 )
                 inserted += 1
-            elif dose["updated_at"] > existing["updated_at"]:  # type: ignore[operator]
+            elif dose["updated_at"] > existing["updated_at"]:
                 self._conn.execute(
                     "UPDATE doses SET deleted = ?, updated_at = ? WHERE id = ?",
                     (dose["deleted"], dose["updated_at"], dose["id"]),
@@ -259,7 +260,7 @@ class Store:
                     (bev["key"], bev["caffeine_mg"], bev["aliases"], bev["updated_at"]),
                 )
                 inserted += 1
-            elif bev["updated_at"] > existing["updated_at"]:  # type: ignore[operator]
+            elif bev["updated_at"] > existing["updated_at"]:
                 self._conn.execute(
                     """UPDATE beverages
                        SET caffeine_mg = ?, aliases = ?, updated_at = ?
@@ -293,7 +294,7 @@ class Store:
 
     def get_meta(self, key: str) -> str | None:
         row = self._conn.execute("SELECT value FROM meta WHERE key = ?", (key,)).fetchone()
-        return row["value"] if row else None  # type: ignore[index]
+        return row["value"] if row else None
 
     def set_meta(self, key: str, value: str) -> None:
         self._conn.execute(
