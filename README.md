@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/hispresso-v0.1.png" alt="hisspresso banner" />
+  <img src="assets/hispresso-v0.2.png" alt="hisspresso banner" />
 </p>
 
 # hisspresso
