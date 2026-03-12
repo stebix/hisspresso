@@ -8,7 +8,7 @@
 [![Type Check](https://github.com/stebix/hisspresso/actions/workflows/typecheck.yml/badge.svg)](https://github.com/stebix/hisspresso/actions/workflows/typecheck.yml)
 [![Tests](https://github.com/stebix/hisspresso/actions/workflows/test.yml/badge.svg)](https://github.com/stebix/hisspresso/actions/workflows/test.yml)
 
-Your friendly Python-based caffeine intake tracker for the terminal. Log beverages, model pharmacokinetic decay, and visualize residual caffeine over time — all from the command line.
+Your friendly Python-based caffeine intake tracker for the terminal. Log beverages, model pharmacokinetic decay, and visualize residual caffeine over time - all while being able to keep living in the terminal.
 
 ## Installation
 
