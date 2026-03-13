@@ -95,6 +95,14 @@ hisspresso sync pull                 # import remote changes
 hisspresso sync status               # show sync info
 ```
 
+## Planned features
+
+- [ ] hypothetical consumption or some kind of oracle like: "can I drink another shot now and be under 50 mg at 23:00 when I go to bed?"
+- [ ] live view mode that updates the graph and stats in real-time
+- [ ] fix beverage labels on graph - currently they clip/overlap if beverages are logged close together
+- [ ] more graph themes
+- [ ] maybe beverage selection menu with icons (seems bloaty and hard to do well in terminal, but could be nice)
+
 ---
 
 Jannik Stebani, 2026. Licensed under MIT. See [LICENSE](LICENSE).
